@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Login from "./Login";
+import Signup from "./Signup";
 
 const TabPanel = ({ children, value, index }) => {
   if (value === index) return <div hidden={value !== index}>{children}</div>;
   else return null;
 };
-const Login = () => {
+const Home = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div style={{ width: "100%", height: "100%", margin: "0 auto" }}>
       <center>
         <div style={{ marginTop: "5%" }}>
           <div
@@ -41,38 +41,15 @@ const Login = () => {
                 <Tab label='Sign Up' />
               </Tabs>
             </Paper>
+
+            {/* Login form  */}
             <TabPanel value={currentTab} index={0}>
-              <div>
-                <div style={{ padding: "40px 0 0 0", margin: "10px" }}>
-                  <TextField required placeholder='Username' variant='outlined' />
-                </div>
-                <div style={{ padding: "20px 0 20px 0", margin: "10px" }}>
-                  <TextField required placeholder='Password' variant='outlined' type='password' />
-                </div>
-                <div>
-                  <Button variant='contained' color='primary' size='large' style={{ marginBottom: "20px" }}>
-                    Login
-                  </Button>
-                </div>
-              </div>
+              <Login />
             </TabPanel>
+
+            {/* Sign up form  */}
             <TabPanel value={currentTab} index={1}>
-              <div>
-                <div style={{ padding: "40px 0 0 0", margin: "10px" }}>
-                  <TextField required placeholder='Username' variant='outlined' />
-                </div>
-                <div style={{ padding: "20px 0 0 0", margin: "10px" }}>
-                  <TextField required placeholder='Password' variant='outlined' type='password' />
-                </div>
-                <div style={{ padding: "20px 0 20px 0", margin: "10px" }}>
-                  <TextField required placeholder='Confirm Password' variant='outlined' type='password' />
-                </div>
-                <div>
-                  <Button variant='contained' color='primary' size='large' style={{ marginBottom: "20px" }}>
-                    Sign Up
-                  </Button>
-                </div>
-              </div>
+              <Signup />
             </TabPanel>
           </Paper>
         </div>
@@ -82,4 +59,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Home;
