@@ -2,16 +2,17 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import sha256 from "crypto-js/sha256";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import DisplayMessage from "../HelperComponents/DisplayMessage";
 
-const Signup = (props) => {
+const Signup = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const [error, setError] = useState();
   const [cookies, setCookies] = useCookies();
+  const history = useHistory();
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -33,7 +34,7 @@ const Signup = (props) => {
           setError("Username already existed");
         } else {
           setCookies("sessionID", res.sessionID, { maxAge: 43200 });
-          props.history.push("/main");
+          history.push("/main");
         }
       })
       .catch((err) => console.log("Failed to sign up", err));
@@ -68,4 +69,4 @@ const Signup = (props) => {
   );
 };
 
-export default withRouter(Signup);
+export default Signup;
