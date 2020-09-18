@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import sha256 from "crypto-js/sha256";
+import { withRouter } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { v4 as uuidv4 } from "uuid";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const [cookies, setCookies] = useCookies();
 
   const SubmitHandler = (e) => {
     e.preventDefault();
@@ -17,8 +21,10 @@ const Login = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
+        setCookies("sessionID", uuidv4());
         setUsername();
         setPassword();
+        history.push("/main");
       })
       .catch((err) => console.log(err));
   };
@@ -39,4 +45,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRouter(Login);
